@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdescour <cdescour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdescour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 18:40:56 by cdescour          #+#    #+#             */
-/*   Updated: 2022/03/21 13:18:07 by cdescour         ###   ########.fr       */
+/*   Created: 2022/02/22 11:02:03 by cdescour          #+#    #+#             */
+/*   Updated: 2022/03/21 13:17:17 by cdescour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	ft_bzero(void *s, size_t n)
 {
-	char			*dst;
-	unsigned int	total;
-	unsigned int	i;
+	size_t	i;
+	char	*str;
 
-	total = count * size;
-	dst = malloc(total);
-	if (!dst)
-		return (NULL);
 	i = 0;
-	while (total--)
-		dst[i++] = 0;
-	return ((void *)dst);
+	str = s;
+	while (i < n)
+		str[i++] = 0;
+	s = str;
 }
