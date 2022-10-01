@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdescour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/26 18:49:42 by cdescour          #+#    #+#             */
-/*   Updated: 2022/02/28 15:07:25 by cdescour         ###   ########.fr       */
+/*   Created: 2022/02/23 13:41:59 by cdescour          #+#    #+#             */
+/*   Updated: 2022/03/21 13:47:45 by cdescour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	unsigned int	i;
-	char			*last_occurence;
+	size_t	i;
+	size_t	j;
 
-	last_occurence = NULL;
+	if (needle[0] == '\0')
+		return ((char *)haystack);
 	i = 0;
-	while (s[i])
+	while (haystack[i] && i < len)
 	{
-		if (s[i] == (char)c)
-			last_occurence = (char *)&s[i];
+		j = 0;
+		if (haystack[i] == needle[j])
+		{
+			while (i + j < len && haystack[i + j] == needle[j])
+			{
+				j++;
+				if (!needle[j])
+					return ((char *)&haystack[i]);
+			}
+		}
 		i++;
 	}
-	if ((char)c == s[i])
-		return ((char *)&s[i]);
-	return (last_occurence);
+	return (0);
 }

@@ -1,29 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdescour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/28 20:24:52 by cdescour          #+#    #+#             */
-/*   Updated: 2022/03/21 12:56:45 by cdescour         ###   ########.fr       */
+/*   Created: 2022/03/14 21:41:36 by cdescour          #+#    #+#             */
+/*   Updated: 2022/03/21 13:53:21 by cdescour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+int	ft_len_itoa(int n)
 {
-	size_t			i;
-	unsigned char	*ptr;
+	int	len;
 
-	ptr = (unsigned char *)s;
-	i = 0;
-	while (i < n)
+	len = 2;
+	if (n == 0)
+		return (len);
+	if (n >= 0)
 	{
-		if ((ptr[i]) == (unsigned char)c)
-			return (&ptr[i]);
-		i++;
+		n = -n;
+		len = 1;
 	}
-	return (NULL);
+	while (n != 0)
+	{
+		len++;
+		n = n / 10;
+	}
+	return (len);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*str;
+	int		len_itoa;
+
+	len_itoa = ft_len_itoa(n);
+	str = NULL;
+	str = malloc(sizeof(char) * len_itoa);
+	if (!str)
+		return (NULL);
+	len_itoa--;
+	str[len_itoa] = 0;
+	if (n < 0)
+		str[0] = '-';
+	else if (n == 0)
+		str[0] = '0';
+	else
+		n = -n;
+	while (n != 0)
+	{
+		len_itoa--;
+		str[len_itoa] = -(n % 10 - '0');
+		n = n / 10;
+	}
+	return (str);
 }

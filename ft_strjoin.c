@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdescour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/26 16:41:03 by cdescour          #+#    #+#             */
-/*   Updated: 2022/03/21 13:23:04 by cdescour         ###   ########.fr       */
+/*   Created: 2022/03/14 21:27:19 by cdescour          #+#    #+#             */
+/*   Updated: 2022/03/22 23:43:30 by cdescour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
+	size_t	lena;
+	size_t	lenb;
 	size_t	i;
-	size_t	j;
-	size_t	dest_length;
-	size_t	src_length;
+	char	*str;
 
-	src_length = ft_strlen(src);
-	dest_length = ft_strlen(dst);
-	j = dest_length;
 	i = 0;
-	if (dest_length < size - 1 && size > 0)
+	lena = ft_strlen(s1);
+	lenb = ft_strlen(s2);
+	str = malloc(sizeof(char) * (lena + lenb + 1));
+	if (!str)
+		return (NULL);
+	while (s1[i])
 	{
-		while (src[i] && dest_length + i < size - 1)
-		{
-			dst[j] = src[i];
-			j++;
-			i++;
-		}
-		dst[j] = 0;
+		str[i] = s1[i];
+		i++;
 	}
-	if (dest_length >= size)
-		dest_length = size;
-	return (dest_length + src_length);
+	while (s2[i - lena])
+	{
+		str[i] = s2[i - lena];
+		i++;
+	}
+	str[i] = 0;
+	return (str);
 }
