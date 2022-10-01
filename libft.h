@@ -1,48 +1,54 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: cdescour <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/22 23:06:00 by cdescour          #+#    #+#              #
-#    Updated: 2022/03/22 23:18:33 by cdescour         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cdescour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/25 13:14:47 by cdescour          #+#    #+#             */
+/*   Updated: 2022/03/22 23:38:03 by cdescour         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-SRCS	=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c\
-			ft_toupper.c ft_tolower.c ft_atoi.c ft_strmapi.c ft_strtrim.c\
-			ft_strlen.c ft_strlcpy.c ft_strlcat.c ft_atoi.c ft_strchr.c\
-			ft_strrchr.c ft_strnstr.c ft_strncmp.c ft_striteri.c\
-			ft_calloc.c ft_strdup.c ft_split.c ft_memmove.c\
-			ft_bzero.c ft_memset.c ft_memcpy.c ft_memcmp.c ft_memchr.c\
-			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c\
-			ft_substr.c	ft_strjoin.c ft_itoa.c\
+#ifndef LIBFT_H
+# define LIBFT_H
 
-OBJS	= ${SRCS:.c=.o}
+# include <unistd.h>
+# include <stdlib.h>
 
-NAME	= libft.a
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
+int		ft_isalnum(int c);
+int		ft_isascii(int c);
+int		ft_isprint(int c);
+int		ft_toupper(int c);
+int		ft_tolower(int c);
+int		ft_atoi(const char *str);
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_itoa(int n);
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strrchr(const char *s, int c);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strtrim(char const *s1, char const *set);
+void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t count, size_t size);
+void	*ft_memset(void *pointer, int value, size_t count);
+void	*ft_memmove(void *dst, const void *src, size_t len);
+void	*ft_memchr(const void *s, int c, size_t n);
+char	*ft_strdup(const char *s1);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		ft_memcmp(const void *s1, const void *s2, size_t n);
+char	**ft_split(char const *s, char c);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
+void	ft_putnbr_fd(int n, int fd);
+void	*ft_memcpy(void *str, const void *dst, size_t size);
 
-CC		= gcc
-
-RM		= rm -f
-
-CFLAGS 	= -Wall -Wextra -Werror
-
-.c.o:
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
-
-${NAME}:	${OBJS}
-			ar rcs ${NAME} ${OBJS}
-
-all:		${NAME}
-
-clean: 
-			${RM} ${OBJS}
-
-fclean:		clean
-			${RM} ${NAME}
-
-re:			fclean all
-
-.PHONY:		all clean fclean re
+#endif
